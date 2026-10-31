@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GadgetGridController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GadgetGridController::class, 'index']);
+
+Route::get('/category', [GadgetGridController::class, 'category'])->name('product-category');
+
+Route::get('/detail', [GadgetGridController::class, 'detail'])->name('product-detail');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

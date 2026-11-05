@@ -1,58 +1,235 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# GadgetGrid: Gadget E-commerce Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> A web-based e-commerce application for browsing, comparing and buying gadgets online, with an administrator dashboard for managing products, categories, stock and orders.
 
-## About Laravel
+**Course:** CSE 346.2, Southeast University
+**Group:** 2
+**Instructor:** _[Askek Seum]_
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. [Problem Statement](#problem-statement)
+2. [Objectives](#objectives)
+3. [Features](#features)
+4. [Tech Stack](#tech-stack)
+5. [System Architecture](#system-architecture)
+6. [Database Design](#database-design)
+7. [Installation Guide](#installation-guide)
+8. [Project Structure](#project-structure)
+9. [Routes Overview](#routes-overview)
+10. [Testing](#testing)
+11. [Screenshots](#screenshots)
+12. [Development Status](#development-status)
+13. [Future Enhancements](#future-enhancements)
+14. [Team](#team)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Problem Statement
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Buying gadgets from small local shops is often slow and unorganized. Customers have no easy way to compare products, check availability, or track their orders, and shop owners rely on manual records for stock and sales.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Objectives
 
-## Agentic Development
+- Give customers a fast, clean way to browse gadgets by category and view full product details.
+- Let customers add items to a cart and place orders online.
+- Give administrators a single dashboard to manage products, categories, stock and orders.
+- Build the system on secure authentication, role-based access and a responsive interface.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Features
 
-```bash
-composer require laravel/boost --dev
+### Customer side
+- Browse products by category
+- Product detail pages with images, description and price
+- Shopping cart
+- Online order placement
+- User registration, login and profile management
 
-php artisan boost:install
+### Administrator side
+- Product management (create, update, delete)
+- Category management
+- Stock tracking
+- Order management
+
+### System
+- Secure authentication with email verification
+- Role-based access control
+- Responsive layout for desktop, tablet and mobile
+- Server-side validation and CSRF protection
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Backend framework | Laravel 13 (PHP) |
+| Database | MySQL |
+| Frontend | Blade templates, Bootstrap, HTML5, CSS3, JavaScript |
+| Authentication | Laravel authentication scaffolding |
+| Testing | PHPUnit |
+| Dependency management | Composer, NPM |
+| Local environment | XAMPP (Apache, MySQL, PHP) |
+| Version control | Git and GitHub |
+
+## System Architecture
+
+GadgetGrid follows the **MVC (Model-View-Controller)** pattern:
+
+```
+Browser  →  Route  →  Controller  →  Model (Eloquent)  →  MySQL
+                          ↓
+                    Blade View  →  HTML response
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+- **Routes** (`routes/web.php`) map URLs to controllers.
+- **Controllers** (`GadgetGridController`, `CartController`, `ProfileController`) handle requests and business logic.
+- **Models** use Eloquent ORM to interact with the database.
+- **Views** are Blade templates rendered on the server.
 
-## Contributing
+## Database Design
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Core entities:
 
-## Code of Conduct
+| Table | Purpose |
+|---|---|
+| `users` | Customers and administrators |
+| `categories` | Product categories |
+| `products` | Gadgets with price, stock and description |
+| `orders` | Orders placed by users |
+| `order_items` | Products and quantities within an order |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> _Add your ER diagram here: `docs/er-diagram.png`_
 
-## Security Vulnerabilities
+## Installation Guide
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Requirements
 
-## License
+- PHP 8.3 or higher
+- Composer
+- MySQL (XAMPP recommended on Windows)
+- Node.js and NPM
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/shamimgalaxy/GadgetGrid.git
+cd GadgetGrid
+
+# 2. Install PHP dependencies
+composer install
+
+# 3. Install frontend dependencies
+npm install
+
+# 4. Create the environment file and generate the app key
+cp .env.example .env
+php artisan key:generate
+```
+
+Open `.env` and set your database details:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gadgetgrid
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Create an empty database named `gadgetgrid` in phpMyAdmin, then:
+
+```bash
+# 5. Run migrations (and seeders, if available)
+php artisan migrate --seed
+
+# 6. Build frontend assets
+npm run build
+
+# 7. Start the development server
+php artisan serve
+```
+
+Visit **http://127.0.0.1:8000** in your browser.
+
+## Project Structure
+
+```
+GadgetGrid/
+├── app/
+│   ├── Http/Controllers/     # GadgetGridController, CartController, ProfileController
+│   └── Models/               # Eloquent models
+├── database/
+│   ├── migrations/           # Database schema
+│   └── seeders/              # Sample data
+├── resources/
+│   └── views/                # Blade templates (website, auth, dashboard)
+├── routes/
+│   ├── web.php               # Web routes
+│   └── auth.php              # Authentication routes
+├── tests/                    # PHPUnit tests
+└── public/                   # Public assets
+```
+
+## Routes Overview
+
+| Method | URI | Name | Description |
+|---|---|---|---|
+| GET | `/` | n/a | Home page |
+| GET | `/category` | `product-category` | Product listing by category |
+| GET | `/detail` | `product-detail` | Product detail page |
+| GET | `/show-cart` | `cart` | Shopping cart |
+| GET | `/dashboard` | `dashboard` | Authenticated dashboard |
+| GET/PATCH/DELETE | `/profile` | `profile.*` | Profile management |
+
+## Testing
+
+Run the automated test suite with PHPUnit:
+
+```bash
+php artisan test
+```
+
+## Screenshots
+
+> _Add screenshots to a `docs/screenshots/` folder and reference them here._
+
+| Home | Category | Product Detail |
+|---|---|---|
+| ![Home](docs/screenshots/home.png) | ![Category](docs/screenshots/category.png) | ![Detail](docs/screenshots/detail.png) |
+
+## Development Status
+
+- [x] Project setup (Laravel 13, MySQL, PHPUnit)
+- [x] Authentication and profile management
+- [x] Storefront pages (home, category, product detail)
+- [ ] Shopping cart (in progress)
+- [ ] Checkout and order placement
+- [ ] Administrator dashboard (products, categories, stock, orders)
+- [ ] Final testing and deployment
+
+## Future Enhancements
+
+- Online payment gateway integration (bKash, Nagad, card payments)
+- Product search, filters and sorting
+- Product comparison and wishlist
+- Customer reviews and ratings
+- Order tracking and email notifications
+- Sales reports and analytics for administrators
+
+## Team
+
+| Name | Student ID | Role |
+|---|---|---|
+| Shamim Ahmed | 2023100011001 | Full Stack Developer |
+| Apurba Karmaker | 2024000010114 | _[Role]_ |
+| Hasan Mahmud | 2024000010078 | _[Role]_ |
+
+**University:** Southeast University, Department of CSE
+**Course:** CSE 346.2
+
+---
+
+_Developed as a course project for CSE 346.2._

@@ -4,7 +4,7 @@
 
 **Course:** CSE 346.2, Southeast University
 **Group:** 2
-**Instructor:** _[Askek Seum]_
+**Instructor:** _Askek Seum
 
 ---
 
